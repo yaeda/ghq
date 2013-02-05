@@ -1,0 +1,66 @@
+ghq () {
+    root=${$(git config --get $0.root):-~/extrepo}
+    git=${GIT-git}
+
+    __ghq_clone () {
+        url=$1
+        parts=("${(s#[:/]#)url%.git}")
+        name=${parts[-2]##*:}
+        proj=$parts[-1]
+        test -n "$name" && test -n "$proj" || (echo "Could not parse URL: $url"; false) || return
+        (
+            __ghq_cd
+            test -d @$name || mkdir @$name
+            (cd @$name; $git clone $url $proj)
+            ln -s @$name/$proj $proj
+        )
+    }
+
+    __ghq_cd () {
+        echo "$root/$1"
+        cd $root/$1
+    }
+
+    __ghq_git () {
+        __ghq_cd $1
+        shift
+        echo "$git $@"
+        $git "$@"
+    }
+
+    case $1 in
+        -clone)
+            __ghq_clone $2
+        ;;
+
+        -cd)
+            __ghq_cd $2
+        ;;
+
+        -git)
+            shift
+            __ghq_git "$@"
+        ;;
+
+        http://*|https://*|git://*|git@*|*.git)
+            __ghq_clone $1
+        ;;
+
+        *|)
+            if [ -n "$1" -a -d "$root/$1" ]; then
+                if [ "$#" -eq 1 ]; then
+                    __ghq_cd $1
+                else
+                    __ghq_git "$@"
+                fi
+            else
+                cat <<USAGE
+Usage: $0 <url>                          ; or $0 -clone <url>
+       $0 <project>                      ; or $0 -cd <project>
+       $0 <project> <git subcommand> ... ; or $0 -git <project> <git subcommand>
+USAGE
+                false
+            fi
+        ;;
+    esac
+}

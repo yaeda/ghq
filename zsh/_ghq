@@ -1,0 +1,19 @@
+#compdef ghq
+
+_arguments \
+    '1:commands:((-clone\:Clone\ repository -cd\:cd\ to\ project -git:Execute\ Git\ subcommand))' \
+    ':projects:->proj'
+
+case $state in
+    proj)
+        case $line[1] in
+            -cd|-git)
+                _path_files -W ${$(git config --get ghq.root):-~/extrepo} -g '*(@) @*/*(/)'
+            ;;
+        esac
+    ;;
+esac
+
+return 1;
+
+# vim: set ft=zsh:
