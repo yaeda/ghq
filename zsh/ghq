@@ -11,8 +11,14 @@ ghq () {
         (
             __ghq_cd
             test -d @$name || mkdir @$name
-            (cd @$name; $git clone $url $proj)
-            ln -s @$name/$proj $proj
+            if [ -L $proj ]; then
+                echo "$proj is already cloned; Now add new remote"
+                (cd $proj; $git remote add $name $url; $git remote update $name);
+            else
+                (cd @$name; $git clone $url $proj)
+                echo "Symlinking $proj -> @$name/$proj"
+                ln -s @$name/$proj $proj
+            fi
         )
     }
 
