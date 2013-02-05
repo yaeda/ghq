@@ -11,7 +11,7 @@ Clones target repository under `~/extrepo/@author/project` (configurable by `git
 For example, `ghq -clone https://github.com/motemen/ghq`
 
  * clones repository into `~/extrepo/@motemen/ghq`
- * and creates symlinks `~/extrepo/ghq` linking to `@motemen/ghq`
+ * and creates a symlink `~/extrepo/ghq` linking to `@motemen/ghq`
 
 ### Chdir to a local repository
 
