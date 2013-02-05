@@ -4,7 +4,7 @@ ghq () {
 
     __ghq_clone () {
         url=$1
-        parts=("${(s#[:/]#)url%.git}")
+        parts=("${(s#/#)url%.git}")
         name=${parts[-2]##*:}
         proj=$parts[-1]
         test -n "$name" && test -n "$proj" || (echo "Could not parse URL: $url"; false) || return
@@ -64,3 +64,5 @@ USAGE
         ;;
     esac
 }
+
+# vim: set ft=zsh:
