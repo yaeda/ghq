@@ -29,7 +29,7 @@ Changes pwd to the cloned repository.
 
 Add in your .zshrc:
 
-```zsh
+```shell
 fpath=(path_to_ghq_dir $fpath)
 autoload -U ghq
 autoload -U compinit; compinit

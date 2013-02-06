@@ -3,7 +3,7 @@ ghq () {
     git=${GIT-git}
 
     __ghq_clone () {
-        url=$1
+        url=${1%/}
         parts=("${(s#/#)url%.git}")
         name=${parts[-2]##*:}
         proj=$parts[-1]
@@ -16,8 +16,7 @@ ghq () {
                 (cd $proj; $git remote add $name $url; $git remote update $name);
             else
                 (cd @$name; $git clone $url $proj)
-                echo "Symlinking $proj -> @$name/$proj"
-                ln -s @$name/$proj $proj
+                ln -v -s @$name/$proj $proj
             fi
         )
     }
