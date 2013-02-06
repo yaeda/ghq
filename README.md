@@ -30,7 +30,27 @@ Changes pwd to the cloned repository.
 Add in your .zshrc:
 
 ```shell
-fpath=(path_to_ghq_dir $fpath)
+fpath=(path_to_ghq_dir/zsh $fpath)
 autoload -U ghq
 autoload -U compinit; compinit
 ```
+
+## ON REPOSITORIES LAYOUT
+
+`ghq` layouts repositories like below:
+
+	.
+	|-- @cho45
+	|   |-- Config-ENV
+	:
+	|   |-- jsdeferred
+	|   `-- starter.pl
+	|-- @cloudhead
+	|   |-- http-console
+	|   `-- less.js
+	:
+	|-- Brownie -> @masaki/Brownie
+	|-- Class-Accessor-Lite -> @kazuho/p5-Class-Accessor-Lite
+	:
+	|-- webiblo -> @mizzy/webiblo
+	`-- ws -> @einaros/ws

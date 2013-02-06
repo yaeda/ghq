@@ -23,7 +23,7 @@ ghq () {
 
     __ghq_cd () {
         echo "$root/$1"
-        cd $root/$1
+        cd $root/$1 > /dev/null
     }
 
     __ghq_git () {
