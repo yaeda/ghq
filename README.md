@@ -1,5 +1,7 @@
 # ghq - Tiny GitHub repositories manager
 
+`ghq` allows you to clone other's GitHub repositories hierarchically and cleanly, under a certain root directory.
+
 ## USAGE
 
 ### Clone a repository
@@ -35,9 +37,9 @@ autoload -U ghq
 autoload -U compinit; compinit
 ```
 
-## ON REPOSITORIES LAYOUT
+## REPOSITORIES LAYOUT
 
-`ghq` layouts repositories like below:
+`ghq` settles cloned repositories and symlinks to them as below:
 
 	.
 	|-- @cho45
