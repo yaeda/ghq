@@ -58,6 +58,8 @@ ghq () {
                 else
                     __ghq_git "$@"
                 fi
+            elif [ "$#" -eq 1 ]; then
+		__ghq_clone "git@github.com:$1.git"
             else
                 cat <<USAGE
 Usage: $0 <url>                          ; or $0 -clone <url>
